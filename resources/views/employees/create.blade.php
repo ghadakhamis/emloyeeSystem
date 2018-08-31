@@ -6,18 +6,35 @@
         <form method="post" action="/employees">
             {{csrf_field()}}
             <div class="form-group row">
-                <label for="fullName" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
+                <label for="fullName" class="col-md-2 col-form-label text-md-right">{{ __('Full Name') }}</label>
                 <div class="col-md-6">
-                    <input id="fullName" type="text" name="fullName" class="form-control" required/>
+                    <input id="fullName" type="text" name="fullName" class="form-control{{ $errors->has('fullName') ? ' is-invalid' : '' }}" required/>
+                    @if ($errors->has('fullName'))
+                        <span class="invalid-feedback">
+                            <strong>{{ $errors->first('fullName') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
             <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
+                <label for="email" class="col-md-2 col-form-label text-md-right">{{ __('E-Mail') }}</label>
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email">
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"/>
                     @if ($errors->has('email'))
                         <span class="invalid-feedback">
                             <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="skills" class="col-md-2 col-form-label text-md-right">{{ __('Skills') }}</label>
+                <div class="col-md-6">
+                    <input id="skills" type="text" data-role="tagsinput" class="form-control{{ $errors->has('skills') ? ' is-invalid' : '' }}" name="skills" multiple/>
+
+                    @if ($errors->has('skills'))
+                        <span class="invalid-feedback">
+                            <strong>{{ $errors->first('skills') }}</strong>
                         </span>
                     @endif
                 </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Skill;
+use App\Employee;
+
 
 class EmployeesController extends Controller
 {
@@ -14,6 +16,11 @@ class EmployeesController extends Controller
     public function store(Request $request){
 
         $employee = $request->only(['fullName','email']);
-        $skills= $request->only('skills');
+        $skills= explode(',',$request->skills);
+
+        $employee = Employee::create($employee);
+        $employee->skills()->attach($skills);
+
+        return redirect('/employees/create');
     }
 }

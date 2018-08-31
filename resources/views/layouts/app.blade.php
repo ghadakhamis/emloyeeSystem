@@ -10,7 +10,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet"  href="{{asset('css/app.css')}}" />
-
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+       
     </head>
     <body>
     <div id="app">
@@ -29,6 +31,8 @@
         </nav>
         <div class="container"> 
             @yield('content')
-        </div>    
+        </div>   
+        <!-- Javascript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> 
     </body>  
 </html>      

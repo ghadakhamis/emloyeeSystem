@@ -14,4 +14,8 @@ class Employee extends Model
     protected $fillable = [
         'fullName', 'email',
     ];
+
+    public function skills(){
+        return $this->belongsToMany(Skill::class);
+    }
 }
