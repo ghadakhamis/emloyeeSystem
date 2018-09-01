@@ -42,6 +42,10 @@ class EmployeesController extends Controller
         return view('index',['employees' => Employee::all(),'employee' => $employee]);
     }
 
+    public function update(Employee $employee,Request $request){
+        dd($request);
+    }
+
     public function destroy(Employee $employee){
         $employee->skills()->detach();
         $employee->delete();

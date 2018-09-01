@@ -12,10 +12,6 @@
 */
 
 Route::get('/','EmployeesController@start');
-
-Route::get('/employees/create','EmployeesController@create');
-Route::post('/employees','EmployeesController@store');
-Route::delete('/employees/{employee}','EmployeesController@destroy');
-Route::get('/employees/{employee}/edit','EmployeesController@edit');
+Route::resource('employees','EmployeesController');
 
 
