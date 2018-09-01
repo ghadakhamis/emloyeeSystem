@@ -19,7 +19,14 @@ class EmployeesController extends Controller
         $skills= explode(',',$request->skills);
 
         $employee = Employee::create($employee);
-        $employee->skills()->attach($skills);
+        foreach($skills as $skill){
+            if(Skill::where('name',$skill)->count() == 0){
+                $skill = Skill::create(['name' => $skill]);
+            }else{
+                $skill = Skill::where('name',$skill)->get();
+            }   
+            $employee->skills()->attach($skill); 
+        }
 
         return redirect('/employees/create');
     }
