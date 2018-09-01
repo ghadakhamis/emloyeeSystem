@@ -10,11 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
-*/
+
 Route::get('/employees/create','EmployeesController@create');
 Route::post('/employees','EmployeesController@store');
 Route::delete('/employees/{employee}','EmployeesController@destroy');
