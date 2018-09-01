@@ -33,4 +33,11 @@ class EmployeesController extends Controller
 
         return redirect('/employees/create');
     }
+
+
+    public function destroy(Employee $employee){
+        $employee->skills()->detach();
+        $employee->delete();
+        return redirect('/employees/create'); 
+    }
 }

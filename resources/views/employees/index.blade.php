@@ -19,7 +19,7 @@
                             </form>
                         </div>
                         <div class="col-md-6">
-                            <form method="delete" action="/employees/{{$employee->id}}" >
+                            <form method="post" action="/employees/{{$employee->id}}" >
                                 {{csrf_field()}}
                                 {{method_field('DELETE')}}
                                 <input type="submit" value="Delete"   onclick="return confirm('are you sure')" class="btn btn-danger"/>                    
