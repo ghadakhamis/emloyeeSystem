@@ -34,7 +34,9 @@ class EmployeesController extends Controller
         return redirect('/employees/create');
     }
 
-
+    public function edit(Employee $employee){
+        return view('employees.create',['employees' => Employee::all(),'employee' => $employee]);
+    }
     public function destroy(Employee $employee){
         $employee->skills()->detach();
         $employee->delete();
