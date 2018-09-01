@@ -10,11 +10,11 @@ use App\Employee;
 class EmployeesController extends Controller
 {
     public function start(){
-        return view('index',['employees' => Employee::all()]);
+        return view('index',['employees' => Employee::paginate(5)]);
     }
 
     public function create(){
-        return view('employees.create',['employees' => Employee::all()]);
+        return view('employees.create',['employees' => Employee::paginate(5)]);
     }
 
     public function store(Request $request){
@@ -39,7 +39,7 @@ class EmployeesController extends Controller
     }
 
     public function edit(Employee $employee){
-        return view('index',['employees' => Employee::all(),'employee' => $employee]);
+        return view('index',['employees' => Employee::paginate(5),'employee' => $employee]);
     }
 
     public function update(Employee $employee,Request $request){
