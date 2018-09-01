@@ -9,6 +9,10 @@ use App\Employee;
 
 class EmployeesController extends Controller
 {
+    public function start(){
+        return view('index',['employees' => Employee::all()]);
+    }
+
     public function create(){
         return view('employees.create',['employees' => Employee::all()]);
     }
@@ -31,15 +35,16 @@ class EmployeesController extends Controller
             }  
         }
 
-        return redirect('/employees/create');
+        return redirect('/');
     }
 
     public function edit(Employee $employee){
-        return view('employees.create',['employees' => Employee::all(),'employee' => $employee]);
+        return view('index',['employees' => Employee::all(),'employee' => $employee]);
     }
+
     public function destroy(Employee $employee){
         $employee->skills()->detach();
         $employee->delete();
-        return redirect('/employees/create'); 
+        return redirect('/'); 
     }
 }

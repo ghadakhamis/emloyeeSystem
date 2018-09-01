@@ -1,5 +1,3 @@
-@extends('layouts.app')
-@section('content')
 <div class="card">
     <h5 class="card-header">Employee Information</h5>
     <div class="card-body">
@@ -49,8 +47,3 @@
         </form>
     </div>    
 </div>
-<div class="card">
-    @include('employees.index',['employees' => $employees])
-</div>
-
-@endsection
