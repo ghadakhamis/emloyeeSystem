@@ -10,7 +10,7 @@ use App\Employee;
 class EmployeesController extends Controller
 {
     public function create(){
-        return view('employees.create',['skills' => Skill::all()]);
+        return view('employees.create',['employees' => Employee::all()]);
     }
 
     public function store(Request $request){

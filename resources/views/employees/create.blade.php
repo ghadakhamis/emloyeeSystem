@@ -49,4 +49,8 @@
         </form>
     </div>    
 </div>
+<div class="card">
+    @include('employees.index',['employees' => $employees])
+</div>
+
 @endsection
