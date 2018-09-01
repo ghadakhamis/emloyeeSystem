@@ -10,29 +10,22 @@ use App\Employee;
 class EmployeesController extends Controller
 {
     public function start(){
-        return view('index',['employees' => Employee::paginate(5)]);
+        return view('index',['employees' => Employee::paginate(5),'skills' => Skill::all()]);
     }
 
     public function create(){
-        return view('employees.create',['employees' => Employee::paginate(5)]);
+        return view('employees.create',['employees' => Employee::paginate(5),'skills' => Skill::all()]);
     }
 
     public function store(Request $request){
 
         $employee = $request->only(['fullName','email']);
-        $skills= explode(',',$request->skills);
+        $skills = $request->only('skills');
 
         $employee = Employee::create($employee);
-        foreach($skills as $skill){
-            if(Skill::where('name',$skill)->count() == 0){
-                $skillObj = Skill::create(['name' => $skill]);
-            }else{
-                $skillObj = Skill::where('name',$skill)->get();
-            } 
-            
-            if($employee->skills()->where('name',$skill)->count() == 0){
-                $employee->skills()->attach($skillObj); 
-            }  
+        foreach($skills['skills'] as $skill){
+            $skillObj = json_decode($skill);
+            $employee->skills()->attach($skillObj->id);   
         }
 
         return redirect('/');

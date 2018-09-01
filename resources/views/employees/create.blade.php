@@ -28,7 +28,11 @@
             <div class="form-group row">
                 <label for="skills" class="col-md-2 col-form-label text-md-right">{{ __('Skills') }}</label>
                 <div class="col-md-6">
-                    <input id="skills" type="text" data-role="tagsinput" class="form-control{{ $errors->has('skills') ? ' is-invalid' : '' }}" name="skills" multiple/>
+                    <select id="skills" class="form-control{{ $errors->has('skills') ? ' is-invalid' : '' }}" name="skills[]" multiple>
+                        @foreach($skills as $skill )
+                            <option value="{{ $skill }}">{{ $skill->name }}</option>
+                        @endforeach
+                    <select/>
 
                     @if ($errors->has('skills'))
                         <span class="invalid-feedback">
