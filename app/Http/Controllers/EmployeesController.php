@@ -24,19 +24,24 @@ class EmployeesController extends Controller
 
         $employee = Employee::create($employee);
         foreach($skills['skills'] as $skill){
-            $skillObj = json_decode($skill);
-            $employee->skills()->attach($skillObj->id);   
+            $employee->skills()->attach($skill);   
         }
 
         return redirect('/');
     }
 
     public function edit(Employee $employee){
-        return view('index',['employees' => Employee::paginate(5),'employee' => $employee]);
+        $skillsId=[];
+        foreach($employee->skills()->get() as $empSkill){
+            $skillsId[] = $empSkill->id;
+        }
+        return view('index',['employees' => Employee::paginate(5),'employee' => $employee,'skills' => Skill::all(),'skillsId'=> $skillsId]);
     }
 
     public function update(Employee $employee,Request $request){
-        dd($request);
+        $employee->update($request->only(['fullName','email']));
+        $employee->skills()->sync($request->skills);
+        return redirect('/');
     }
 
     public function destroy(Employee $employee){

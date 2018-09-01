@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                     <select id="skills" class="form-control{{ $errors->has('skills') ? ' is-invalid' : '' }}" name="skills[]" multiple>
                         @foreach($skills as $skill )
-                            <option value="{{ $skill }}">{{ $skill->name }}</option>
+                            <option value="{{ $skill->id }}">{{ $skill->name }}</option>
                         @endforeach
                     <select/>
 
