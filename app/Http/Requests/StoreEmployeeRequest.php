@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class StoreEmployeeRequest extends FormRequest
 {
@@ -21,12 +22,28 @@ class StoreEmployeeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
-        return [
-            'fullName' => 'required',
-            'email' => 'nullable|email|unique:employees',
-            'skills' => 'nullable|exists:skills,id|array'
-        ];
+        switch($request->method())
+        {
+            case 'POST':
+            {
+                return [
+                    'fullName' => 'required',
+                    'email' => 'nullable|email|unique:employees',
+                    'skills' => 'nullable|exists:skills,id|array'
+                ];
+            }  
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'fullName' => 'required',
+                    'email' => 'nullable|email|unique:employees,email,'.$request->employee->id,
+                    'skills' => 'nullable|exists:skills,id|array'
+                ];   
+            }  
+
+        }        
     }
 }
