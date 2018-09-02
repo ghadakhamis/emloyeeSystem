@@ -19,13 +19,16 @@ class EmployeesController extends Controller
     }
 
     public function store(StoreEmployeeRequest $request){
-        dd($request);
-        $employee = $request->only(['fullName','email']);
-        $skills = $request->only('skills');
 
+        $employee = $request->only(['fullName','email']);
         $employee = Employee::create($employee);
-        foreach($skills['skills'] as $skill){
-            $employee->skills()->attach($skill);   
+
+        if($request->only('skills')){
+            $skills = $request->only('skills');
+
+            foreach($skills['skills'] as $skill){
+                $employee->skills()->attach($skill);   
+            }
         }
 
         return redirect('/');
