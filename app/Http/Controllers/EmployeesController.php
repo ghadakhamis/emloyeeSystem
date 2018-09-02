@@ -23,13 +23,7 @@ class EmployeesController extends Controller
         $employee = $request->only(['fullName','email']);
         $employee = Employee::create($employee);
 
-        if($request->only('skills')){
-            $skills = $request->only('skills');
-
-            foreach($skills['skills'] as $skill){
-                $employee->skills()->attach($skill);   
-            }
-        }
+        $employee->skills()->attach($request->skills);   
 
         return redirect('/');
     }
@@ -42,7 +36,7 @@ class EmployeesController extends Controller
         return view('index',['employees' => Employee::paginate(5),'employee' => $employee,'skills' => Skill::all(),'skillsId'=> $skillsId]);
     }
 
-    public function update(Employee $employee,Request $request){
+    public function update(Employee $employee,StoreEmployeeRequest $request){
         $employee->update($request->only(['fullName','email']));
         $employee->skills()->sync($request->skills);
         return redirect('/');
