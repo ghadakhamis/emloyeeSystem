@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Skill;
 use App\Employee;
+use App\Http\Requests\StoreEmployeeRequest;
 
 
 class EmployeesController extends Controller
@@ -17,8 +18,8 @@ class EmployeesController extends Controller
         return view('employees.create',['employees' => Employee::paginate(5),'skills' => Skill::all()]);
     }
 
-    public function store(Request $request){
-
+    public function store(StoreEmployeeRequest $request){
+        dd($request);
         $employee = $request->only(['fullName','email']);
         $skills = $request->only('skills');
 
