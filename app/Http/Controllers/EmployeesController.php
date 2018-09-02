@@ -15,7 +15,7 @@ class EmployeesController extends Controller
     }
 
     public function create(){
-        return view('employees.create',['skills' => Skill::all()]);
+        return view('index',['employees' => Employee::paginate(5),'skills' => Skill::all()]);
     }
 
     public function store(StoreEmployeeRequest $request){
@@ -33,7 +33,7 @@ class EmployeesController extends Controller
         foreach($employee->skills()->get() as $empSkill){
             $skillsId[] = $empSkill->id;
         }
-        return view('index',['employee' => $employee,'skills' => Skill::all(),'skillsId'=> $skillsId]);
+        return view('index',['employees' => Employee::paginate(5),'employee' => $employee,'skills' => Skill::all(),'skillsId'=> $skillsId]);
     }
 
     public function update(Employee $employee,StoreEmployeeRequest $request){
