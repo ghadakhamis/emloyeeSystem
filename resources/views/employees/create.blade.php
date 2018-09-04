@@ -28,11 +28,7 @@
             <div class="form-group row">
                 <label for="skills" class="col-md-2 col-form-label text-md-right">{{ __('Skills') }}</label>
                 <div class="col-md-6">
-                    <select id="skills" class="form-control{{ $errors->has('skills') ? ' is-invalid' : '' }}" name="skills[]" multiple>
-                        @foreach($skills as $skill )
-                            <option value="{{ $skill->id }}">{{ $skill->name }}</option>
-                        @endforeach
-                    <select/>
+                    <input type="text" id="skills" class="typeahead form-control tm-input tm-input-info" name="skills" multiple/>
 
                     @if ($errors->has('skills'))
                         <span class="invalid-feedback">

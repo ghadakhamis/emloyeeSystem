@@ -11,9 +11,12 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet"  href="{{asset('css/app.css')}}" />
         <!-- CSS -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-       
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>     
     </head>
     <body>
     <div id="app">
@@ -32,11 +35,26 @@
         </nav>
         <div class="container"> 
             @yield('content')
-        </div>   
-        <!-- Javascript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-     
+        </div>  
     </body>  
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var tagApi =$(".tm-input").tagsManager();
+
+            var path = "{{ route('autocomplete') }}";
+            $("input.typeahead").typeahead({
+
+                source:  function (query, process) {
+
+                    return $.get(path, { query: query }, function (data) {
+                        return process(data);
+                    });
+                },
+                afterSelect :function (item){
+                    tagApi.tagsManager("pushTag",item.name);
+                }   
+            });
+            
+        });    
+    </script>
 </html>      

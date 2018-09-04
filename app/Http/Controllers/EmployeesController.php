@@ -23,7 +23,12 @@ class EmployeesController extends Controller
         $employee = $request->only(['fullName','email']);
         $employee = Employee::create($employee);
 
-        $employee->skills()->attach($request->skills);   
+        $skills = explode(',',$request['hidden-skills']);
+        foreach($skills as $skill){
+            if($skillObj= Skill::where('name',$skill)->first()){
+                $employee->skills()->attach($skillObj->id);   
+            }
+        }
 
         return redirect('/');
     }
