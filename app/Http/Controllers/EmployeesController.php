@@ -43,7 +43,16 @@ class EmployeesController extends Controller
 
     public function update(Employee $employee,StoreEmployeeRequest $request){
         $employee->update($request->only(['fullName','email']));
-        $employee->skills()->sync($request->skills);
+
+        $skillsName = explode(',',$request['hidden-skills']);
+        $skills = [];
+        foreach($skillsName as $skillName){
+            if($skillObj= Skill::where('name',$skillName)->first()){
+                $skills[] = $skillObj->id;   
+            }
+        }
+
+        $employee->skills()->sync($skills);
         return redirect('/');
     }
 

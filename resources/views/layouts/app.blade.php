@@ -41,6 +41,13 @@
         $(document).ready(function() {
             var tagApi =$(".tm-input").tagsManager();
 
+            @if(isset($employee))
+                @foreach($employee->skills as $skill)
+                    var skill = "{{$skill->name}}";
+                    tagApi.tagsManager("pushTag",skill);
+                 @endforeach
+            @endif 
+
             var path = "{{ route('autocomplete') }}";
             $("input.typeahead").typeahead({
 
