@@ -22,7 +22,7 @@
                             <form method="post" action="/employees/{{$employee->id}}" >
                                 {{csrf_field()}}
                                 {{method_field('DELETE')}}
-                                <input type="submit" value="Delete"   onclick="return confirm('are you sure')" class="btn btn-danger"/>                    
+                                <input type="submit" value="Delete"   onclick="return confirm('Are you sure that you want to delete this item?')" class="btn btn-danger"/>                    
                             </form>
                         </div>
                     </div>
